@@ -9,6 +9,7 @@ const addNewUser = async (user: IUser) : Promise<IUserServiceResponse> => {
         message : ""
     }
     try {
+        const token = await newUserModel.generateToken();
         await newUserModel.save();
         response.isSuccess = true;
         response.message = "User Successfully added to database";
@@ -21,5 +22,14 @@ const addNewUser = async (user: IUser) : Promise<IUserServiceResponse> => {
     }
     return response;
 }
+
+// const getUserByUsername = async (username : string) => {
+//     try {
+//         return await UserMongooseModel.findOne({ username });
+//     } catch(error) {
+//         //@ts-ignore
+//         console.log(chalk.bgRed(error.message))
+//     }
+// }
 
 export { addNewUser };

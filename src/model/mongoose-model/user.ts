@@ -1,4 +1,5 @@
-import {Schema, model} from "mongoose";
+import {Model, Schema, model} from "mongoose";
+import JsonWebTokenError from "jsonwebtoken";
 
 interface IUser {
     username : string,
@@ -8,7 +9,13 @@ interface IUser {
     token ?: string
 }
 
-const userSchema = new Schema<IUser>({
+interface IUserMethods {
+    generateToken() : string;
+}
+
+type UserModel = Model<IUser, {}, IUserMethods>;
+
+const userSchema = new Schema<IUser, UserModel, IUserMethods>({
     username : {
         type: String,
         required: true
@@ -28,6 +35,14 @@ const userSchema = new Schema<IUser>({
     }
 });
 
-const UserMongooseModel = model<IUser>('User', userSchema);
+userSchema.method('generateToken', async function(this : IUser) {
+    const user = this;
+    //@ts-ignore
+    const token = JsonWebTokenError.sign({ _id : this._id.toString() }, process.env.SECRET_KEY);
+    user.token = token;
+    return token
+})
+
+const UserMongooseModel = model<IUser, UserModel>('User', userSchema);
 
 export { IUser, UserMongooseModel };

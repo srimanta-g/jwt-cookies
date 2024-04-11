@@ -10,7 +10,7 @@ app.use(Express.json());
 app.use(userRouter);
 
 // @ts-ignore
-// connectToDatabase(process.env.MONGODB_URL);
+connectToDatabase(process.env.MONGODB_URL);
 
 app.listen(process.env.PORT, () => {
     console.log(chalk.bgGreen("Server Started"));

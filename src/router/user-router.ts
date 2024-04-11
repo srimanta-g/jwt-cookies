@@ -22,4 +22,10 @@ userRouter.post('/user/add-new-user', (req: Request, res:Response) => {
     })
 }) ;
 
+// userRouter.get('/user/:username', (req:Request, res:Response) => {
+//     getUserByUsername(req.params['username']).then((result) => {
+//         console.log(result);
+//     });
+// })
+
 export { userRouter };

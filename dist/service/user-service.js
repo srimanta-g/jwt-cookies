@@ -22,6 +22,7 @@ const addNewUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
         message: ""
     };
     try {
+        const token = yield newUserModel.generateToken();
         yield newUserModel.save();
         response.isSuccess = true;
         response.message = "User Successfully added to database";
