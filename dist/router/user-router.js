@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.userRouter = void 0;
 const express_1 = require("express");
 const user_service_1 = require("../service/user-service");
+const auth_middleware_1 = require("../middleware/auth-middleware");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const userRouter = (0, express_1.Router)();
 exports.userRouter = userRouter;
@@ -28,4 +29,7 @@ userRouter.post('/user/add-new-user', (req, res) => {
             "message": error.message
         });
     });
+});
+userRouter.get('/user/:username', auth_middleware_1.authenticateUserMiddleware, (req, res) => {
+    res.send("Hello");
 });

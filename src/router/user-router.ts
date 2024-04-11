@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { IUser } from '../model/mongoose-model/user';
 import { addNewUser } from '../service/user-service';
+import { authenticateUserMiddleware } from '../middleware/auth-middleware';
 import bcryptjs from  'bcryptjs';
 
 const userRouter = Router();
@@ -26,10 +27,10 @@ userRouter.post('/user/add-new-user', (req: Request, res:Response) => {
     })
 }) ;
 
-// userRouter.get('/user/:username', (req:Request, res:Response) => {
-//     getUserByUsername(req.params['username']).then((result) => {
-//         console.log(result);
-//     });
-// })
+userRouter.get('/user/:username', authenticateUserMiddleware, (req:Request, res:Response) => {
+    res.send("Hello");
+})
+
+
 
 export { userRouter };
