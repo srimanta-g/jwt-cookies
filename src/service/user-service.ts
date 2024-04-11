@@ -21,3 +21,5 @@ const addNewUser = async (user: IUser) : Promise<IUserServiceResponse> => {
     }
     return response;
 }
+
+export { addNewUser };

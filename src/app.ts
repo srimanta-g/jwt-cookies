@@ -9,7 +9,7 @@ const app = Express();
 app.use(Express.json());
 app.use(userRouter);
 
-//@ts-ignore
+// @ts-ignore
 // connectToDatabase(process.env.MONGODB_URL);
 
 app.listen(process.env.PORT, () => {
