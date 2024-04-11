@@ -17,6 +17,11 @@ userRouter.post('/user/add-new-user', (req, res) => {
         lastName: req.body.lastname
     };
     (0, user_service_1.addNewUser)(user).then((result) => {
+        var _a;
+        if (result.isSuccess === false) {
+            res.status(500).send(result);
+        }
+        res.cookie('token', (_a = result.body) === null || _a === void 0 ? void 0 : _a.token);
         res.status(201).send(result);
     }).catch((error) => {
         res.status(500).send({

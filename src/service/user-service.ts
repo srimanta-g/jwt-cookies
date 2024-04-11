@@ -23,13 +23,4 @@ const addNewUser = async (user: IUser) : Promise<IUserServiceResponse> => {
     return response;
 }
 
-// const getUserByUsername = async (username : string) => {
-//     try {
-//         return await UserMongooseModel.findOne({ username });
-//     } catch(error) {
-//         //@ts-ignore
-//         console.log(chalk.bgRed(error.message))
-//     }
-// }
-
 export { addNewUser };

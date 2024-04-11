@@ -14,6 +14,10 @@ userRouter.post('/user/add-new-user', (req: Request, res:Response) => {
     }
 
     addNewUser(user).then((result) => {
+        if(result.isSuccess === false) {
+            res.status(500).send(result);
+        }
+        res.cookie('token', result.body?.token)
         res.status(201).send(result);
     }).catch((error) => {
         res.status(500).send({
