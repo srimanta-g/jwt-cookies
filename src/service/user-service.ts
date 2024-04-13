@@ -23,4 +23,14 @@ const addNewUser = async (user: IUser) : Promise<IUserServiceResponse> => {
     return response;
 }
 
-export { addNewUser };
+const getUserById = async (id : string) => {
+    try {
+        const u = await UserMongooseModel.findById(id);
+        return u;
+    }catch(error) {
+        //@ts-ignore
+        console.log(chalk.bgRed(error.message));
+    }
+}
+
+export { addNewUser, getUserById };

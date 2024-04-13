@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addNewUser = void 0;
+exports.getUserById = exports.addNewUser = void 0;
 const chalk_1 = __importDefault(require("chalk"));
 const user_1 = require("../model/mongoose-model/user");
 const addNewUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
@@ -37,3 +37,14 @@ const addNewUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     return response;
 });
 exports.addNewUser = addNewUser;
+const getUserById = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const u = yield user_1.UserMongooseModel.findById(id);
+        return u;
+    }
+    catch (error) {
+        //@ts-ignore
+        console.log(chalk_1.default.bgRed(error.message));
+    }
+});
+exports.getUserById = getUserById;

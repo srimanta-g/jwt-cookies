@@ -27,8 +27,12 @@ userRouter.post('/user/add-new-user', (req: Request, res:Response) => {
     })
 }) ;
 
-userRouter.get('/user/:username', authenticateUserMiddleware, (req:Request, res:Response) => {
-    res.send("Hello");
+userRouter.get('/user/:username', authenticateUserMiddleware, async (req:Request, res:Response) => {
+    const value = res.locals.value;
+    if(res.locals.isAuthenticated === false) {
+        res.status(403).send()
+    }
+    res.send(value);
 })
 
 
